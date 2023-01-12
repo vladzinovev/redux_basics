@@ -11,13 +11,13 @@ const products=createSlice({
             }
         },
         productsLength:0,
-        test:"123"
+        test:123
     },
     reducers:{
-        /* addToFavorites:(state,action)=>{
-            state.favorites=action.payload.arr;
+        addOneForTest:(state,action)=>{
+            state.test=state.test+1;
         },
-        saveCart:(state,action)=>{
+        /*saveCart:(state,action)=>{
             state.cart=action.payload.arr;
         },
         saveDiscount:(state,action)=>{
@@ -27,4 +27,4 @@ const products=createSlice({
 })
 
 export default products.reducer
-/* export const {addToFavorites,saveCart,saveDiscount}=products.actions */
+export const {addOneForTest}=products.actions

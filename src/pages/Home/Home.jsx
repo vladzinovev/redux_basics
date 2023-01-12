@@ -1,4 +1,5 @@
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import {addOneForTest} from "../../redux/products";
 
 const Home=()=>{
     //const products=useSelector(store=>store);//Objects
@@ -8,11 +9,13 @@ const Home=()=>{
     
     //const products=useSelector(store=>store.products.products);//[]
 
-    const products=useSelector(store=>store.products);
+    const {test,filter,products}=useSelector(store=>store.products);
+    const dispatch=useDispatch();
 
     return(
         <div>
-            {products.test}
+            <button onClick={()=>dispatch(addOneForTest())}>Plus one for test</button>
+            {test}
         </div>
     )
 }
