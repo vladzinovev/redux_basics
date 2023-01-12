@@ -3,9 +3,19 @@ import axios from "axios";
 
 export const getAllPosts=createAsyncThunk(
     'posts/getAllPosts',
-    async()=>{
-        const res=await axios ('https://jsonplaceholder.typicode.com/posts')
-        return res.data
+    async(_,{rejectWithValue})=>{
+        try{
+            const res=await axios ('https://jsonplaceholder.typicode.com/posts')
+            
+            if(res.status!==200){
+                throw new Error('Server error!')
+            }
+            return res.data
+
+        } catch(err){
+            return rejectWithValue(err.message)
+        }
+        
     }
 )
 
@@ -13,8 +23,9 @@ const posts=createSlice({
     name:"posts",
     initialState:{
         posts:[],
-        loading:false,
-        test:1
+        status:'',
+        test:1,
+        error:''
     },
     reducers:{
         addOne:(state,action)=>{
@@ -25,15 +36,17 @@ const posts=createSlice({
     extraReducers:{
         //pending-ожидание
         [getAllPosts.pending]:(state,action)=>{
-            state.loading=true
+            state.status='loading'
         },
         //rejected-ошибка
         [getAllPosts.rejected]:(state,action)=>{
-            state.loading=true
+            state.status='error';
+            state.error=action.payload
         },
         //fulfilled-отработало корректно
         [getAllPosts.fulfilled]:(state,action)=>{
-            state.loading=false
+            state.status='success'
+            state.posts=action.payload
         }
     }
 })
