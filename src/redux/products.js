@@ -11,20 +11,18 @@ const products=createSlice({
             }
         },
         productsLength:0,
-        test:123
+        test:123,
+        name:'',
     },
     reducers:{
         addOneForTest:(state,action)=>{
             state.test=state.test+1;
         },
-        /*saveCart:(state,action)=>{
-            state.cart=action.payload.arr;
-        },
-        saveDiscount:(state,action)=>{
-            state.discount=action.payload.arr;
-        }, */
+        changeName:(state,action)=>{
+            state.name=action.payload;
+        }
     }
 })
 
 export default products.reducer
-export const {addOneForTest}=products.actions
+export const {addOneForTest,changeName}=products.actions

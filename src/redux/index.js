@@ -1,9 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit"
-import products from './user'
+import products from './products'
+import posts from './posts'
 
 const store = configureStore({
     reducer:{
-        products
+        products,
+        posts
     },
     /* middleware:(getDefaultMiddleware)=>
         getDefaultMiddleware({
